@@ -1,0 +1,6 @@
+{
+  "name": "Visit Rwanda - Discover the Land of a Thousand Hills",
+  "description": "A cinematic, elegant travel experience showcasing Rwanda's breathtaking volcanic landscapes, pristine rainforests, and world-class tourism.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

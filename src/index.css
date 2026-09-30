@@ -1,0 +1,345 @@
+@import "tailwindcss";
+
+@layer utilities {
+  .font-instrument {
+    font-family: 'Instrument Serif', 'Cormorant Garamond', Georgia, serif;
+  }
+  .font-cormorant {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+  }
+  .font-sans-custom {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+}
+
+/* Atmospheric Spotlight Beam & Volumetric Lighting */
+.spotlight-beam {
+  background: conic-gradient(
+    from 180deg at 50% 100%,
+    transparent 68deg,
+    rgba(30, 64, 175, 0.25) 78deg,
+    rgba(37, 99, 235, 0.65) 86deg,
+    rgba(96, 165, 250, 0.85) 90deg,
+    rgba(37, 99, 235, 0.65) 94deg,
+    rgba(30, 64, 175, 0.25) 102deg,
+    transparent 112deg
+  );
+  filter: blur(32px);
+  transform-origin: 50% 100%;
+}
+
+.spotlight-core {
+  background: radial-gradient(
+    ellipse 65% 55% at 50% 100%,
+    rgba(147, 197, 253, 0.85) 0%,
+    rgba(59, 130, 246, 0.75) 25%,
+    rgba(29, 78, 216, 0.45) 55%,
+    rgba(15, 23, 42, 0) 80%
+  );
+  filter: blur(28px);
+}
+
+.spotlight-ambient {
+  background: radial-gradient(
+    circle at 50% 65%,
+    rgba(37, 99, 235, 0.2) 0%,
+    rgba(30, 58, 138, 0.12) 40%,
+    transparent 70%
+  );
+  filter: blur(40px);
+}
+
+/* Smooth breathing animation for volumetric light */
+@keyframes beamPulse {
+  0%, 100% {
+    opacity: 0.92;
+    transform: scaleX(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scaleX(1.05);
+  }
+}
+
+.animate-beam-pulse {
+  animation: beamPulse 8s ease-in-out infinite;
+}
+
+/* Star / dust particle floating effect */
+@keyframes floatParticle {
+  0% {
+    transform: translateY(0px) scale(0.8);
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-80px) scale(1.2);
+    opacity: 0;
+  }
+}
+
+.particle {
+  animation: floatParticle 6s ease-in-out infinite;
+}
+
+/* Glass input container */
+.glass-pill {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.glass-pill:focus-within {
+  border-color: rgba(255, 255, 255, 0.28);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8), 0 0 25px rgba(59, 130, 246, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+/* Continuous marquee from RIGHT to LEFT */
+@keyframes flowRightToLeft {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-flow-rtl {
+  display: flex;
+  width: max-content;
+  animation: flowRightToLeft 40s linear infinite;
+}
+
+.animate-flow-rtl:hover {
+  animation-play-state: paused;
+}
+
+/* Dot matrix texture pattern */
+.dot-matrix {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.18) 1.2px, transparent 1.2px);
+  background-size: 14px 14px;
+}
+
+/* Editorial glass panel */
+.editorial-glass-panel {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.015) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.editorial-glass-card {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(14px);
+}
+
+/* ============================================================
+   PREMIUM ANIMATION SYSTEM
+   ============================================================ */
+
+/* ── Ambient keyframes for decorative blobs ──────────────── */
+@keyframes blobDrift {
+  0%, 100% { transform: translateY(0px) scale(1); }
+  33%       { transform: translateY(-10px) scale(1.02); }
+  66%       { transform: translateY(6px) scale(0.99); }
+}
+
+@keyframes ambientFloat {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%       { transform: translate(6px, -8px) scale(1.03); }
+}
+
+@keyframes subtleBreath {
+  0%, 100% { opacity: 0.85; }
+  50%       { opacity: 1; }
+}
+
+.blob-drift {
+  animation: blobDrift 14s ease-in-out infinite;
+  will-change: transform;
+}
+
+.ambient-float {
+  animation: ambientFloat 18s ease-in-out infinite;
+  will-change: transform;
+}
+
+.subtle-breath {
+  animation: subtleBreath 10s ease-in-out infinite;
+}
+
+/* ── Navigation link hover — underline reveal ────────────── */
+.nav-link {
+  position: relative;
+  color: inherit;
+  text-decoration: none;
+  transition: color 220ms ease;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: rgb(45 212 191); /* teal-400 */
+  transition: width 300ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+.nav-link:hover {
+  color: #ffffff;
+}
+
+/* ── Discover blocks hover system ───────────────────────── */
+.discover-block {
+  transition:
+    transform 350ms cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 300ms ease,
+    border-color 300ms ease,
+    box-shadow 350ms ease;
+  will-change: transform;
+}
+
+.discover-block:hover {
+  transform: translateY(-6px) scale(1.015);
+  border-color: rgba(45, 212, 191, 0.35) !important;
+  box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(45, 212, 191, 0.12);
+}
+
+/* Arrow inside discover block */
+.discover-block .discover-arrow {
+  transition: transform 280ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.discover-block:hover .discover-arrow {
+  transform: translateX(5px);
+}
+
+/* Icon inside discover block */
+.discover-block .discover-icon {
+  transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.discover-block:hover .discover-icon {
+  transform: translateY(-2px) scale(1.1);
+}
+
+/* ── Editorial glass card hover ─────────────────────────── */
+.editorial-glass-card {
+  transition:
+    transform 350ms cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 300ms ease,
+    box-shadow 350ms ease;
+  will-change: transform;
+}
+
+.editorial-glass-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(45, 212, 191, 0.3) !important;
+  box-shadow: 0 28px 56px -14px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.14);
+}
+
+/* ── Feature list row hover ─────────────────────────────── */
+.feature-row {
+  transition: transform 250ms ease, opacity 250ms ease;
+}
+
+.feature-row:hover {
+  transform: translateX(4px);
+}
+
+/* ── Primary CTA button micro-interaction ───────────────── */
+.btn-primary-lift {
+  transition:
+    transform 220ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 220ms ease,
+    background-color 200ms ease;
+  will-change: transform;
+}
+
+.btn-primary-lift:hover {
+  transform: translateY(-2px) scale(1.015);
+  box-shadow: 0 8px 30px -8px rgba(255, 255, 255, 0.25);
+}
+
+.btn-primary-lift:active {
+  transform: translateY(0) scale(0.99);
+  box-shadow: none;
+}
+
+/* ── Pillar cards hover ──────────────────────────────────── */
+.pillar-card {
+  transition:
+    transform 320ms cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 280ms ease,
+    background-color 280ms ease;
+  will-change: transform;
+}
+
+.pillar-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(45, 212, 191, 0.25) !important;
+  background-color: rgba(255, 255, 255, 0.06) !important;
+}
+
+/* ── Footer nav link hover ──────────────────────────────── */
+.footer-link {
+  transition: color 200ms ease, transform 200ms ease;
+  display: inline-block;
+}
+
+.footer-link:hover {
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+/* ── Sound toggle / icon button hover ───────────────────── */
+.icon-btn {
+  transition:
+    background-color 200ms ease,
+    border-color 200ms ease,
+    transform 200ms ease;
+}
+
+.icon-btn:hover {
+  transform: scale(1.08);
+}
+
+/* ── Scroll indicator bounce – keep existing Tailwind animate-bounce ──────── */
+
+/* ============================================================
+   REDUCED MOTION — disable all decorative motion
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .blob-drift,
+  .ambient-float,
+  .subtle-breath,
+  .animate-beam-pulse,
+  .particle,
+  .animate-flow-rtl {
+    animation: none !important;
+  }
+
+  .discover-block,
+  .editorial-glass-card,
+  .feature-row,
+  .btn-primary-lift,
+  .pillar-card,
+  .footer-link,
+  .icon-btn {
+    transition: none !important;
+    transform: none !important;
+  }
+
+  .nav-link::after {
+    transition: none !important;
+  }
+}
